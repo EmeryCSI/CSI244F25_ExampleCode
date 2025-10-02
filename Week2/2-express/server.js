@@ -3,6 +3,7 @@ console.log("Hello Nodemon");
 //Now we can use express
 const express = require("express");
 const os = require("os");
+const path = require("path");
 
 //step 2 - we call the express constructor to create an app
 const app = express();
@@ -20,6 +21,16 @@ app.get("/system", (req, res) => {
     release: os.release(),
   };
   res.send(sysObject);
+});
+app.get("/form", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+//A GET REQUEST: The default request, it sends its data in a query object
+//The query is passed in the URL
+app.get("/form-submit", (req, res) => {
+  //console.log(req.query);
+  const { fName, lName, phone } = req.query;
+  res.send(`Your first name is ${fName}, last name: ${lName}, phone: ${phone}`);
 });
 
 //listen on a port
