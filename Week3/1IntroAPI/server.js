@@ -45,7 +45,14 @@ app.get("/courses/:id", (req, res) => {
 //POST request passes data in the BODY
 app.post("/courses", (req, res) => {
   console.log(req.body);
-  res.send("Post Working");
+  const course = {
+    id: courses.length + 1,
+    name: req.body.name,
+    teacher: req.body.teacher,
+  };
+  courses.push(course);
+  res.status(201).json(course);
+  //res.send("Post Working");
 });
 
 //step 4 - Listen on a port
