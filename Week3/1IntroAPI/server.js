@@ -33,13 +33,13 @@ app.get("/courses/:id", (req, res) => {
   //how can i pull out the course that matches id?
   let course;
   //find() gets the first matching record based on a predicate
-  course = courses.find((c) => c.id === id);
+  course = courses.find((c) => c.id == id);
   console.log(`course: ${course}`);
   if (!course) {
     return res.status(404).send("Course not found");
   }
   //we know here that we found it
-  res.json(courses);
+  res.json(course);
 });
 //POST request used to create a record
 //POST request passes data in the BODY
