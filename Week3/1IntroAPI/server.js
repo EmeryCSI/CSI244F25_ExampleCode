@@ -1,5 +1,8 @@
 //step 1 - Import our libraries
 const express = require("express");
+const path = require("path");
+const simpleMiddleware = require("./simpleMiddleware");
+const apiKeymiddleware = require("./apiKeymiddleware");
 
 //step 2 - create an app using the express constructor
 const app = express();
@@ -9,6 +12,10 @@ const PORT = 3000;
 app.use(express.json());
 //This allows express to get data from the body
 app.use(express.urlencoded({ extended: true }));
+//add simple middle ware
+app.use(simpleMiddleware);
+//lets add our api key middleware
+app.use(apiKeymiddleware);
 
 //sample data
 let courses = [
@@ -24,6 +31,12 @@ app.get("/", (req, res) => {
 
 app.get("/courses", (req, res) => {
   res.json(courses);
+});
+//send the user the html form
+app.get("/courseform", (req, res) => {
+  //what do i need to do here?
+  let fullPath = path.join(__dirname, "public", "course-form.html");
+  res.sendFile(fullPath);
 });
 
 app.get("/courses/:id", (req, res) => {
@@ -53,6 +66,29 @@ app.post("/courses", (req, res) => {
   courses.push(course);
   res.status(201).json(course);
   //res.send("Post Working");
+});
+
+//What is a put request
+//put is like a combination of get by id and create
+//you take in an ID in the query string
+//and the data in the body
+app.put("/courses/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  console.log(typeof id);
+  //how can i pull out the course that matches id?
+  let course;
+  //find() gets the first matching record based on a predicate
+  course = courses.find((c) => c.id == id);
+  console.log(`course: ${course}`);
+  if (!course) {
+    return res.status(404).send("Course not found");
+  }
+  const { name, teacher } = req.body;
+  course.name = name;
+  course.teacher = teacher;
+  //sends back a 200 with the updated course
+  res.json(course);
 });
 
 //step 4 - Listen on a port
