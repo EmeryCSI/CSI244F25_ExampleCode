@@ -6,6 +6,7 @@ console.log(process.env.CONNECTION_STRING);
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
+const User = require("./models/user");
 
 //mongoose.connect
 mongoose
@@ -18,6 +19,15 @@ mongoose
 
 app.get("/", (req, res) => {
   res.send("Hello");
+});
+
+app.get("/users", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 app.listen(3000, () => {
