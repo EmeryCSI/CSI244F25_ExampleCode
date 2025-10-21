@@ -36,4 +36,12 @@ const propertySchema = new mongoose.Schema({
   dateAdded: Date,
   //we want each property to have many reviews
   //Let embed an array of reviews into property
+  //reviews is a collection of review schema
+  //Here we embedded the MANY into the ONE
+  reviews: [reviewSchema],
 });
+
+//create the model
+const model = mongoose.model("Property", propertySchema);
+//export the model
+module.exports = model;
