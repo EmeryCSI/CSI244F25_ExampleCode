@@ -1,47 +1,45 @@
 //bring in mongoose
 const mongoose = require("mongoose");
 
+//This is an embedded review schema
 const reviewSchema = new mongoose.Schema({
   rating: {
     type: Number,
-    require: true,
+    required: true,
     min: 1,
     max: 5,
   },
   comment: {
     type: String,
-    require: true,
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 
-//An owner can have multiple properties but each property only has ONE owner
+//next we make a schema
 const propertySchema = new mongoose.Schema({
-  //Reference to the owner table (owner_ID - FK)
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Owner",
-    //What does this mean if we want to create a new property?
-    required: true,
-  },
   address: {
     type: String,
-    require: true,
+    required: true,
   },
   bedrooms: Number,
   price: Number,
   dateAdded: Date,
-  //we want each property to have many reviews
-  //Let embed an array of reviews into property
-  //reviews is a collection of review schema
-  //Here we embedded the MANY into the ONE
+  //I want to add a collection of reviews in propertySchema
   reviews: [reviewSchema],
+  //Reference to the owner table
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Owner",
+    //owner is required - What does this mean for us?
+    required: true,
+  },
 });
 
-//create the model
+//Create the model
 const model = mongoose.model("Property", propertySchema);
-//export the model
+//export that model
 module.exports = model;
