@@ -6,7 +6,6 @@ const propeteryRoutes = require("./routes/propertyRoutes");
 //bring in modules
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;
 
@@ -14,7 +13,6 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 //middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
