@@ -40,10 +40,10 @@ function CreateGame({ onGameCreated }) {
   };
 
   return (
-    <div>
+    <div className="create-game">
       <h2>Create Game</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form className="create-game__form" onSubmit={handleSubmit}>
+        <div className="form-field">
           <label htmlFor="title">Title:</label>
           <input
             type="text"
@@ -56,7 +56,7 @@ function CreateGame({ onGameCreated }) {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label htmlFor="releaseYear">Release Year:</label>
           <input
             type="number"
@@ -72,7 +72,7 @@ function CreateGame({ onGameCreated }) {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label htmlFor="developer">Developer:</label>
           <input
             type="text"
@@ -85,7 +85,7 @@ function CreateGame({ onGameCreated }) {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label htmlFor="publisher">Publisher:</label>
           <input
             type="text"
@@ -98,7 +98,7 @@ function CreateGame({ onGameCreated }) {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label htmlFor="reviewScore">Review Score:</label>
           <input
             type="number"
@@ -116,7 +116,7 @@ function CreateGame({ onGameCreated }) {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label htmlFor="totalSales">Total Sales (millions):</label>
           <input
             type="number"
@@ -133,7 +133,7 @@ function CreateGame({ onGameCreated }) {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label htmlFor="ageRating">Age Rating:</label>
           <select
             id="ageRating"
@@ -151,7 +151,7 @@ function CreateGame({ onGameCreated }) {
           </select>
         </div>
 
-        <div>
+        <div className="form-field checkbox-field">
           <label htmlFor="multiplayer">Multiplayer:</label>
           <input
             type="checkbox"

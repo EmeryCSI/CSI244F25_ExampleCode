@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="app-shell">
         <h1>Games List</h1>
         {selectedGameId ? (
           <>
