@@ -1,22 +1,27 @@
-require("dotenv").config();
-
+// Import the Express framework, which simplifies the process of building web applications
 const express = require("express");
 // Import the cors middleware to enable Cross-Origin Resource Sharing
 const cors = require("cors");
 // Import the movie routes from the movieroutes.js file
-const movieRoutes = require("./routes/movieRoutes");
-
-console.log(process.env.CONNECTION_STRING);
+const movieRoutes = require("./routes/movieroutes");
+//Bring in dotenv and config it
+require("dotenv").config();
+//Check the connection string
+//console.log(process.env.CONNECTION_STRING);
 const mongoose = require("mongoose");
+//call the connect function
 mongoose
   .connect(process.env.CONNECTION_STRING)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Couldn't connect to MongoDB", err));
+  .then(() => console.log("Connected to mongodb"))
+  .catch((err) => console.error("Couldnt connect to mongo ", err));
 
 // Create an instance of the Express application
 const app = express();
 // Set the port for the server to listen on, using an environment variable if available, or defaulting to 3000
 const PORT = process.env.PORT || 3000;
+
+// Add the rate limiter middleware
+//app.use(rateLimit);
 
 // Middleware: Software that runs between the request and response cycle
 // This middleware parses incoming JSON payloads in the request body

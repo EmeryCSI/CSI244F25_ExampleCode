@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import MovieRepository from "../data/movieRepository";
 
 function CreateMovie() {
@@ -16,8 +16,10 @@ function CreateMovie() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  //
   const handleChange = (e) => {
     const { name, value } = e.target;
+    //console.log(movie);
     setMovie((prevMovie) => ({
       ...prevMovie,
       [name]: value,
@@ -25,8 +27,9 @@ function CreateMovie() {
   };
 
   const handleSubmit = async (e) => {
+    //Prevent the page from reloading
     e.preventDefault();
-
+    //I need to talk to my API to create the movie
     try {
       setLoading(true);
       await movieRepository.createMovie(movie);
